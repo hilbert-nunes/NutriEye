@@ -1,0 +1,122 @@
+
+export const LOADING_TIPS = [
+    // 🍅 Geral / Base alimentar
+    "Quanto menor a lista de ingredientes, mais fácil entender o que você está comendo.",
+    "Alimentos in natura quase nunca precisam de rótulo nutricional.",
+    "Tomate enlatado pode ser tão nutritivo quanto o fresco.",
+    "Cozinhar não significa perder todos os nutrientes.",
+    "Nem todo alimento industrializado é ultraprocessado.",
+    "Processamento não é o mesmo que má qualidade.",
+    "O contexto da dieta importa mais que um alimento isolado.",
+    "Comer bem não exige perfeição.",
+    "Um produto “simples” pode ser uma ótima base para receitas.",
+    "Variedade costuma ser mais importante que restrição.",
+
+    // 🧂 Sódio
+    "O sódio natural dos alimentos costuma ser baixo.",
+    "O maior vilão do sódio está nos ultraprocessados, não nos vegetais.",
+    "Molhos prontos concentram grande parte do sódio da refeição.",
+    "Reduzir sódio aos poucos ajuda o paladar a se adaptar.",
+    "Temperos naturais substituem bem o excesso de sal.",
+    "Produtos com menos de 120 mg de sódio/100 g são considerados baixos",
+    "Sódio só vira problema quando o consumo é frequente.",
+    "A maior parte do sal ingerido vem de alimentos industrializados.",
+    "Comer fora de casa costuma aumentar o consumo de sódio.",
+    "Ler rótulos ajuda mais que cortar alimentos à força.",
+
+    // 🌾 Fibras
+    "Fibras ajudam na saciedade e no funcionamento intestinal.",
+    "Alimentos naturais são as principais fontes de fibra.",
+    "Fibras não servem só para o intestino.",
+    "Comer fibras regularmente ajuda no controle da glicemia.",
+    "A maioria das pessoas consome menos fibras do que deveria.",
+    "Fibras não precisam vir de produtos “fitness”.",
+    "Legumes também contam como fonte de fibra.",
+    "Fibras funcionam melhor quando consumidas com água.",
+    "Uma refeição simples pode ser rica em fibras.",
+    "Mais fibras não significa comer menos prazer.",
+
+    // 🧪 Ingredientes e aditivos
+    "Nem todo aditivo é prejudicial.",
+    "A função do aditivo importa mais que o nome difícil.",
+    "Reguladores de acidez ajudam a preservar alimentos.",
+    "Conservantes evitam desperdício alimentar.",
+    "A dose faz o risco, não o nome do ingrediente.",
+    "Aditivos são avaliados por órgãos reguladores.",
+    "Ingredientes comuns também podem ter nomes técnicos.",
+    "“Natural” não significa automaticamente melhor.",
+    "Um ingrediente isolado raramente define a qualidade do produto.",
+    "O conjunto da fórmula é mais importante que um item específico.",
+
+    // 🏷️ Rótulos
+    "Rótulos contam uma história — aprender a ler muda escolhas.",
+    "A tabela nutricional é padronizada para comparação.",
+    "Ingredientes vêm em ordem de quantidade.",
+    "Açúcares escondidos aparecem com vários nomes.",
+    "Comparar rótulos economiza tempo no mercado.",
+    "Informação reduz culpa alimentar.",
+    "Nem tudo que é “zero” é melhor.",
+    "O tamanho da porção influencia a leitura do rótulo.",
+    "Produtos similares podem variar muito em composição.",
+    "Entender rótulos é uma habilidade aprendida.",
+
+    // 🍽️ Contexto de consumo
+    "Um alimento ocasional não define sua saúde.",
+    "Frequência importa mais que exceções.",
+    "Comer consciente é diferente de comer restrito.",
+    "Um bom produto facilita refeições equilibradas.",
+    "Planejamento reduz escolhas impulsivas.",
+    "O melhor alimento é aquele que cabe na sua rotina.",
+    "Comer com prazer também é saúde.",
+    "Equilíbrio vence radicalismo.",
+    "Não existe alimento “perfeito”.",
+    "Alimentação saudável é sustentável no longo prazo.",
+
+    // ⚖️ Calorias e macros
+    "Calorias não são inimigas.",
+    "Qualidade importa mais que quantidade isolada.",
+    "Proteína ajuda na saciedade.",
+    "Gorduras também são necessárias.",
+    "Carboidratos não são vilões universais.",
+    "O corpo precisa de energia para funcionar.",
+    "Nem todo alimento precisa ser “rico em proteína”.",
+    "Refeições equilibradas reduzem beliscos.",
+    "Nutrição não é matemática pura.",
+    "Comer bem não é comer menos, é comer melhor.",
+
+    // 🧠 Ciência e senso crítico
+    "Estudos isolados não definem consenso científico.",
+    "Ciência evolui — alarmismo não.",
+    "Órgãos reguladores avaliam riscos continuamente.",
+    "Evidência forte exige repetição e consenso.",
+    "Medo não é uma boa estratégia alimentar.",
+    "Informação clara empodera escolhas.",
+    "Questionar é saudável.",
+    "Nem tudo que viraliza é verdade.",
+    "Saúde é multifatorial.",
+    "Nutrição não é moda.",
+
+    // 🛒 Mercado e escolhas
+    "O melhor produto é o que você realmente usa.",
+    "Comparar evita arrependimento.",
+    "Um item simples pode melhorar uma refeição inteira.",
+    "Comprar melhor reduz desperdício.",
+    "Escolhas conscientes economizam tempo depois.",
+    "Ter opções saudáveis facilita o dia a dia.",
+    "Cozinhar começa no mercado.",
+    "Um bom ingrediente valoriza a receita.",
+    "Informação reduz impulso.",
+    "Planejar é autocuidado.",
+
+    // 🌱 Mentalidade alimentar
+    "Comer bem não é punição.",
+    "Saúde não é tudo ou nada.",
+    "Pequenas melhorias fazem diferença.",
+    "Alimentação é aprendizado contínuo.",
+    "Escolhas melhores não exigem culpa.",
+    "Flexibilidade é parte da saúde.",
+    "Nutrição também é cultura.",
+    "O prazer faz parte da refeição.",
+    "Consistência vale mais que perfeição.",
+    "Informação é uma aliada, não uma ameaça."
+];
