@@ -79,7 +79,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImagesReady, disabled }) =>
         ))}
         
         {images.length < 2 && (
-          <div className="flex flex-col gap-2">
+          <div className="flex space-between gap-2">
             <button 
               disabled={disabled}
               onClick={() => setShowCamera(true)}
