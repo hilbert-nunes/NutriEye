@@ -114,6 +114,34 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ data }) => {
         </div>
       </section>
 
+      {data.consumption_guide && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div className="bg-green-50 p-5 rounded-xl border border-green-100 flex flex-col">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-2 h-2 rounded-full bg-green-500"></span>
+              <h3 className="text-xs font-black uppercase tracking-widest text-green-800">Uso Ocasional</h3>
+            </div>
+            <p className="text-sm text-green-700 italic flex-1">"{data.consumption_guide.occasional}"</p>
+          </div>
+
+          <div className="bg-yellow-50 p-5 rounded-xl border border-yellow-100 flex flex-col">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
+              <h3 className="text-xs font-black uppercase tracking-widest text-yellow-800">Uso Frequente</h3>
+            </div>
+            <p className="text-sm text-yellow-700 italic flex-1">"{data.consumption_guide.frequent}"</p>
+          </div>
+
+          <div className="bg-blue-50 p-5 rounded-xl border border-blue-100 flex flex-col">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+              <h3 className="text-xs font-black uppercase tracking-widest text-blue-800">Uso Diário</h3>
+            </div>
+            <p className="text-sm text-blue-700 italic flex-1">"{data.consumption_guide.daily}"</p>
+          </div>
+        </div>
+      )}
+
       <div className="grid md:grid-cols-2 gap-6 mb-6">
         <section className="bg-green-50/50 rounded-2xl p-6 border border-green-100">
           <h3 className="text-green-800 font-bold mb-4 flex items-center gap-2 text-xs uppercase tracking-widest">

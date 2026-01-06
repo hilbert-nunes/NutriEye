@@ -34,6 +34,8 @@ export interface NutritionalAnalysis {
     fiber_grams?: number;
     sodium_mg_per_100g: number;
     sodium_classification: "muito baixo" | "baixo" | "moderado" | "alto";
+    sugar_grams?: number;
+    saturated_fat_grams?: number;
     fiber_classification: "pobre" | "fonte" | "alto teor";
     fiber_sodium_feedback: string;
   };
@@ -42,6 +44,11 @@ export interface NutritionalAnalysis {
     is_ultraprocessed: boolean;
     clean_label: boolean;
     risky_ingredients_found: string[];
+  };
+  consumption_guide: {
+    occasional: string;
+    frequent: string;
+    daily: string;
   };
   the_good: string[];
   the_bad: string[];

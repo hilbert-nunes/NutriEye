@@ -77,6 +77,8 @@ export default async function handler(req, res) {
                         fiber_grams: { type: Type.NUMBER },
                         sodium_mg_per_100g: { type: Type.NUMBER },
                         sodium_classification: { type: Type.STRING, enum: ["muito baixo", "baixo", "moderado", "alto"] },
+                        sugar_grams: { type: Type.NUMBER },
+                        saturated_fat_grams: { type: Type.NUMBER },
                         fiber_classification: { type: Type.STRING, enum: ["pobre", "fonte", "alto teor"] },
                         fiber_sodium_feedback: { type: Type.STRING }
                     },
@@ -169,6 +171,47 @@ export default async function handler(req, res) {
         if (!text) throw new Error("API retornou vazio.");
 
         const data = JSON.parse(text);
+
+        // --- BUSINESS LOGIC: Consumption Guide Calculation ---
+        const sodium = data.macro_analysis.sodium_mg_per_100g || 0;
+        const ultraprocessed = data.ingredients_overview.is_ultraprocessed;
+        const sugar = data.macro_analysis.sugar_grams || 0;
+        // Basic limits (approximations based on health guidelines)
+        const LOW_SODIUM = 120;
+        const HIGH_SODIUM = 400;
+        const MOD_SUGAR = 10;
+
+        let guide = {
+            occasional: "Uso tranquilo dentro de uma alimentação equilibrada.",
+            frequent: "",
+            daily: ""
+        };
+
+        // Frequent Logic
+        if (ultraprocessed) {
+            guide.frequent = "Evite o consumo frequente devido ao grau de processamento.";
+        } else if (sodium > HIGH_SODIUM) {
+            guide.frequent = `Atenção ao consumo frequente pelo alto teor de sódio (${sodium}mg).`;
+        } else if (sugar > MOD_SUGAR) {
+            guide.frequent = "Moderado em açúcar, pode fazer parte da rotina se intercalado com opções frescas.";
+        } else {
+            guide.frequent = "Boa base para o dia a dia, especialmente pela composição limpa.";
+        }
+
+        // Daily Logic
+        if (ultraprocessed) {
+            guide.daily = "Prefira alimentos in natura para consumo diário.";
+        } else if (sodium < LOW_SODIUM && sugar < 5) {
+            guide.daily = "Excelente opção para consumo diário, sem impacto negativo relevante.";
+        } else if (sodium < HIGH_SODIUM && sugar < MOD_SUGAR) {
+            guide.daily = "Pode ser consumido diariamente em porções controladas.";
+        } else {
+            guide.daily = "Para consumo diário, considere alternar com versões com menos sal/açúcar.";
+        }
+
+        data.consumption_guide = guide;
+        // -----------------------------------------------------
+
         return res.status(200).json(data);
 
     } catch (error) {
