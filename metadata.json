@@ -1,0 +1,7 @@
+{
+  "name": "NutriEye",
+  "description": "Analisador inteligente de rótulos nutricionais. Descubra a verdade sobre o que você come com análise científica de ingredientes e macronutrientes.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
