@@ -1,8 +1,9 @@
 
 export interface DeepDiveIngredient {
   name: string;
-  warning_level: 'low' | 'medium' | 'high' | 'critical';
+  warning_level: 'safe' | 'low' | 'medium' | 'high' | 'critical';
   short_summary: string;
+  technological_function?: string;
   scientific_evidence: {
     cancer_risk?: string;
     hormones?: string;
@@ -31,12 +32,15 @@ export interface NutritionalAnalysis {
     protein_grams: number;
     calories_total: number;
     fiber_grams?: number;
-    sodium_milligrams?: number;
-    fiber_sodium_feedback?: string;
+    sodium_mg_per_100g: number;
+    sodium_classification: "muito baixo" | "baixo" | "moderado" | "alto";
+    fiber_classification: "pobre" | "fonte" | "alto teor";
+    fiber_sodium_feedback: string;
   };
   ingredients_overview: {
     count: number;
     is_ultraprocessed: boolean;
+    clean_label: boolean;
     risky_ingredients_found: string[];
   };
   the_good: string[];

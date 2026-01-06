@@ -132,7 +132,7 @@ const App: React.FC = () => {
       <footer className="py-6 border-t border-gray-200 bg-white">
         <div className="max-w-4xl mx-auto px-4 flex flex-col items-center gap-2">
           <p className="text-[10px] text-gray-400 uppercase font-black tracking-widest text-center">
-            NutriEye © 2024 - Decisões Saudáveis Através da Ciência
+            NutriEye © 2026 - Decisões Saudáveis Através da Ciência
           </p>
           <p className="text-[8px] text-gray-300 text-center max-w-xs">
             Esta análise é gerada por inteligência artificial e deve ser usada apenas como guia informativo. Consulte sempre um nutricionista.

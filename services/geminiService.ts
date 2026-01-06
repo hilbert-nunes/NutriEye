@@ -3,24 +3,34 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { NutritionalAnalysis } from "../types";
 
 export const analyzeLabels = async (base64Images: string[]): Promise<NutritionalAnalysis> => {
-  console.log("NutriEye: Iniciando análise de rótulos...", { imageCount: base64Images.length });
+  console.log("NutriEye: Iniciando análise científica de rótulos...", { imageCount: base64Images.length });
   
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
-  const prompt = `
-    Analise as imagens fornecidas de um rótulo de alimento (ingredientes e tabela nutricional). 
-    Você é o NutriEye, um especialista em nutrição brasileiro com rigor científico. 
-    Responda EXCLUSIVAMENTE em Português do Brasil em formato JSON.
+  const systemInstruction = `
+    Você é o NutriEye, um especialista em nutrição brasileiro com foco em ciência e evidências.
+    Sua missão é traduzir rótulos SEM praticar terrorismo nutricional.
     
-    Verifique:
-    1. Proporção Caloria/Proteína: Calcule se a densidade proteica é adequada para o total calórico.
-    2. Fibras e Sódio: Analise se o produto tem excesso de sódio (sal) ou se é uma boa fonte de fibras. 
-       Forneça um feedback textual curto (ex: "Sódio excessivo", "Rico em fibras", "Equilibrado em sódio").
-    3. Quantidade e periculosidade dos ingredientes: Aditivos químicos, conservantes, corantes (ex: Caramelo IV).
-    4. Identifique substâncias controversas e forneça o "Deep Dive" científico baseado em estudos da IARC (OMS), EFSA ou FDA.
-    5. Sugira substituições práticas (receitas simples e produtos similares de mercado mais saudáveis).
+    DIRETRIZES DE ANÁLISE (BASE ANVISA RDC 429/2020):
+    1. SÓDIO (referência por 100g):
+       - Muito Baixo: ≤ 40mg. (Classifique como "Excelente/Irrelevante", NUNCA dê alerta).
+       - Baixo: ≤ 120mg.
+       - Moderado: 121mg - 400mg.
+       - Alto: > 400mg (sólidos) ou > 200mg (líquidos).
     
-    Siga rigorosamente este esquema de resposta JSON.
+    2. ADITIVOS:
+       - Diferencie aditivos seguros (ex: Ácido Cítrico, Lecitina de Soja) de aditivos controversos (ex: Caramelo IV, BHA, TBHQ).
+       - Aditivos seguros NÃO devem gerar alertas negativos, apenas menção de função tecnológica.
+    
+    3. PONTUAÇÃO (SCORE):
+       - Clean Label (até 3 ingredientes naturais, ex: Tomate Pelado): Mínimo 90.
+       - Ultraprocessados com aditivos carcinogênicos: Máximo 40.
+    
+    4. LINGUAGEM:
+       - Evite termos como "perigoso" ou "tóxico" para doses reguladas.
+       - Use "evidência científica", "consenso regulatório", "risco associado ao consumo frequente".
+    
+    RESPONDA EM PORTUGUÊS (BR) EM FORMATO JSON.
   `;
 
   const responseSchema = {
@@ -37,19 +47,22 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
           protein_grams: { type: Type.NUMBER },
           calories_total: { type: Type.NUMBER },
           fiber_grams: { type: Type.NUMBER },
-          sodium_milligrams: { type: Type.NUMBER },
-          fiber_sodium_feedback: { type: Type.STRING, description: "Feedback sobre fibras e sódio" }
+          sodium_mg_per_100g: { type: Type.NUMBER },
+          sodium_classification: { type: Type.STRING, enum: ["muito baixo", "baixo", "moderado", "alto"] },
+          fiber_classification: { type: Type.STRING, enum: ["pobre", "fonte", "alto teor"] },
+          fiber_sodium_feedback: { type: Type.STRING }
         },
-        required: ["calories_protein_ratio", "is_balanced", "protein_grams", "calories_total", "fiber_sodium_feedback"]
+        required: ["calories_protein_ratio", "is_balanced", "protein_grams", "calories_total", "sodium_mg_per_100g", "sodium_classification", "fiber_sodium_feedback"]
       },
       ingredients_overview: {
         type: Type.OBJECT,
         properties: {
           count: { type: Type.NUMBER },
           is_ultraprocessed: { type: Type.BOOLEAN },
+          clean_label: { type: Type.BOOLEAN },
           risky_ingredients_found: { type: Type.ARRAY, items: { type: Type.STRING } }
         },
-        required: ["count", "is_ultraprocessed", "risky_ingredients_found"]
+        required: ["count", "is_ultraprocessed", "clean_label", "risky_ingredients_found"]
       },
       the_good: { type: Type.ARRAY, items: { type: Type.STRING } },
       the_bad: { type: Type.ARRAY, items: { type: Type.STRING } },
@@ -80,8 +93,9 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
           type: Type.OBJECT,
           properties: {
             name: { type: Type.STRING },
-            warning_level: { type: Type.STRING },
+            warning_level: { type: Type.STRING, enum: ["safe", "low", "medium", "high", "critical"] },
             short_summary: { type: Type.STRING },
+            technological_function: { type: Type.STRING },
             scientific_evidence: {
               type: Type.OBJECT,
               properties: {
@@ -98,50 +112,34 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
   };
 
   try {
-    console.log("NutriEye: Mapeando imagens para o modelo...");
-    const imageParts = base64Images.map((img, index) => {
-      const parts = img.split(',');
-      if (parts.length < 2) {
-        console.error(`NutriEye: Imagem ${index} inválida (formato base64 incorreto)`);
-        throw new Error("Formato de imagem inválido");
+    const imageParts = base64Images.map((img) => ({
+      inlineData: {
+        data: img.split(',')[1],
+        mimeType: 'image/jpeg'
       }
-      return {
-        inlineData: {
-          data: parts[1],
-          mimeType: 'image/jpeg'
-        }
-      };
-    });
+    }));
 
-    console.log("NutriEye: Enviando requisição para Gemini 3 Flash...");
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: {
         parts: [
-          { text: prompt },
+          { text: "Analise estes rótulos seguindo as diretrizes científicas e retorne o JSON estruturado." },
           ...imageParts
         ]
       },
       config: {
+        systemInstruction,
         responseMimeType: "application/json",
         responseSchema: responseSchema as any
       }
     });
 
-    console.log("NutriEye: Resposta recebida da API.");
     const text = response.text;
-    
-    if (!text) {
-      console.error("NutriEye: Resposta da API está vazia.");
-      throw new Error("A API retornou uma resposta vazia.");
-    }
+    if (!text) throw new Error("API retornou vazio.");
 
-    const parsedResult = JSON.parse(text);
-    console.log("NutriEye: Análise processada com sucesso.", parsedResult);
-    return parsedResult;
-    
+    return JSON.parse(text);
   } catch (error) {
-    console.error("NutriEye: Erro durante a análise:", error);
+    console.error("NutriEye Service Error:", error);
     throw error;
   }
 };
