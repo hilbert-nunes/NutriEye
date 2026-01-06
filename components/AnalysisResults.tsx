@@ -52,7 +52,7 @@ const DeepDiveItem: React.FC<{ item: DeepDiveIngredient }> = ({ item }) => {
         "{item.short_summary}"
       </p>
       <div className="space-y-3">
-        {!isSafe && item.scientific_evidence.cancer_risk && (
+        {!isSafe && item.scientific_evidence?.cancer_risk && (
           <div className="flex gap-3">
             <span className="text-[10px] font-bold w-20 shrink-0 text-gray-400">CÂNCER:</span>
             <span className="text-sm text-gray-600">{item.scientific_evidence.cancer_risk}</span>
@@ -60,7 +60,7 @@ const DeepDiveItem: React.FC<{ item: DeepDiveIngredient }> = ({ item }) => {
         )}
         <div className="flex gap-3 pt-2 border-t border-gray-50">
           <span className="text-[10px] font-bold w-20 shrink-0 text-gray-400">CIÊNCIA:</span>
-          <span className="text-sm font-medium text-gray-800">{item.scientific_evidence.general_consensus}</span>
+          <span className="text-sm font-medium text-gray-800">{item.scientific_evidence?.general_consensus}</span>
         </div>
       </div>
     </div>
@@ -164,11 +164,11 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ data }) => {
               {data.replacements_food.map((recipe, i) => (
                 <div key={i} className="flex gap-4">
                   <div className="w-10 h-10 bg-green-100 text-green-600 rounded-lg flex items-center justify-center shrink-0 font-bold text-[10px]">
-                    {recipe.calories} kcal
+                    {recipe.calories || '-'} kcal
                   </div>
                   <div>
                     <h5 className="font-bold text-gray-900 text-sm">{recipe.name}</h5>
-                    <p className="text-[11px] text-gray-500 mt-0.5">{recipe.ingredients_brief}</p>
+                    <p className="text-[11px] text-gray-500 mt-0.5">{recipe.ingredients_brief || ''}</p>
                   </div>
                 </div>
               ))}
@@ -181,9 +181,11 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ data }) => {
               {data.replacements_market.map((market, i) => (
                 <div key={i} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-100">
                   <span className="font-bold text-gray-700 text-xs">{market.name}</span>
-                  <span className="text-[9px] font-bold text-green-600 bg-white px-2 py-1 rounded border border-green-50 uppercase tracking-tighter">
-                    {market.benefit}
-                  </span>
+                  {market.benefit && (
+                    <span className="text-[9px] font-bold text-green-600 bg-white px-2 py-1 rounded border border-green-50 uppercase tracking-tighter">
+                      {market.benefit}
+                    </span>
+                  )}
                 </div>
               ))}
             </div>
@@ -191,7 +193,7 @@ const AnalysisResults: React.FC<AnalysisResultsProps> = ({ data }) => {
         </div>
       </section>
 
-      <button 
+      <button
         onClick={() => window.location.reload()}
         className="w-full py-4 bg-gray-900 text-white rounded-xl font-black uppercase tracking-widest shadow-xl active:scale-95 transition-all text-sm"
       >

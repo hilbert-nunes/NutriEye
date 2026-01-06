@@ -102,7 +102,8 @@ export default async function handler(req, res) {
                             name: { type: Type.STRING },
                             calories: { type: Type.NUMBER },
                             ingredients_brief: { type: Type.STRING }
-                        }
+                        },
+                        required: ["name", "calories", "ingredients_brief"]
                     }
                 },
                 replacements_market: {
@@ -112,7 +113,8 @@ export default async function handler(req, res) {
                         properties: {
                             name: { type: Type.STRING },
                             benefit: { type: Type.STRING }
-                        }
+                        },
+                        required: ["name", "benefit"]
                     }
                 },
                 deep_dive: {
@@ -130,9 +132,11 @@ export default async function handler(req, res) {
                                     cancer_risk: { type: Type.STRING },
                                     hormones: { type: Type.STRING },
                                     general_consensus: { type: Type.STRING }
-                                }
+                                },
+                                required: ["general_consensus"]
                             }
-                        }
+                        },
+                        required: ["name", "warning_level", "short_summary", "technological_function", "scientific_evidence"]
                     }
                 }
             },
