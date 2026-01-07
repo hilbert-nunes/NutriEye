@@ -6,9 +6,9 @@ import { getCuratedReplacement } from "./replacementService";
 
 export const analyzeLabels = async (base64Images: string[]): Promise<NutritionalAnalysis> => {
   console.log("NutriEye: Iniciando análise científica de rótulos...", { imageCount: base64Images.length });
-  
+
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  
+
   const systemInstruction = `
     Você é o NutriEye, um especialista em nutrição brasileiro.
     Sua missão é classificar e analisar rótulos com precisão científica.
@@ -117,7 +117,7 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
               required: ["general_consensus"]
             }
           },
-         required: ["name", "warning_level", "short_summary", "technological_function", "scientific_evidence"]
+          required: ["name", "warning_level", "short_summary", "technological_function", "scientific_evidence"]
         }
       }
     },
@@ -151,7 +151,7 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
     if (!text) throw new Error("API retornou vazio.");
 
     const data = JSON.parse(text) as NutritionalAnalysis;
-    
+
     console.log("NutriEye: Resposta da IA processada:", {
       nome: data.product_name,
       categoria: data.product_classification.category,
@@ -163,6 +163,31 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
     data.curated_replacement = getCuratedReplacement(data);
 
     return data;
+  } catch (error) {
+    console.error("NutriEye Service Error:", error);
+    throw error;
+  }
+};
+
+export const analyzeLabelsVercel = async (base64Images: string[]): Promise<NutritionalAnalysis> => {
+  console.log("NutriEye: Calling Vercel API for analysis...", { imageCount: base64Images.length });
+
+  try {
+    const response = await fetch('/api/analyze', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ base64Images }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `API Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data as NutritionalAnalysis;
   } catch (error) {
     console.error("NutriEye Service Error:", error);
     throw error;
