@@ -1,6 +1,8 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
 import { NutritionalAnalysis } from "../types";
+import { buildConsumptionGuide } from "./cumsuptionGuide";
+import { getCuratedReplacement } from "./replacementService";
 
 export const analyzeLabels = async (base64Images: string[]): Promise<NutritionalAnalysis> => {
   console.log("NutriEye: Iniciando análise científica de rótulos...", { imageCount: base64Images.length });
@@ -8,29 +10,25 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   const systemInstruction = `
-    Você é o NutriEye, um especialista em nutrição brasileiro com foco em ciência e evidências.
-    Sua missão é traduzir rótulos SEM praticar terrorismo nutricional.
+    Você é o NutriEye, um especialista em nutrição brasileiro.
+    Sua missão é classificar e analisar rótulos com precisão científica.
     
-    DIRETRIZES DE ANÁLISE (BASE ANVISA RDC 429/2020):
-    1. SÓDIO (referência por 100g):
-       - Muito Baixo: ≤ 40mg. (Classifique como "Excelente/Irrelevante", NUNCA dê alerta).
-       - Baixo: ≤ 120mg.
-       - Moderado: 121mg - 400mg.
-       - Alto: > 400mg (sólidos) ou > 200mg (líquidos).
+    DIRETRIZES DE CATEGORIZAÇÃO (CRÍTICO):
+    Classifique o produto obrigatoriamente em uma destas categorias:
+    - extrato_de_tomate, molho_de_tomate, passata, bebida_adocada, bebida_zero, snack_salgado, snack_doce, laticinio, embutido, outros.
     
-    2. ADITIVOS:
-       - Diferencie aditivos seguros (ex: Ácido Cítrico, Lecitina de Soja) de aditivos controversos (ex: Caramelo IV, BHA, TBHQ).
-       - Aditivos seguros NÃO devem gerar alertas negativos, apenas menção de função tecnológica.
+    Use confidence >= 0.85 apenas se tiver CERTEZA absoluta baseado na imagem.
+    Se for um extrato de tomate industrial, classifique como 'extrato_de_tomate'.
+    Se for um molho de tomate pronto ou temperado, classifique como 'molho_de_tomate'.
+
+    DIRETRIZES ANVISA RDC 429/2020:
+    - Sódio (100g): Muito Baixo (≤40mg), Baixo (≤120mg), Moderado (121-400mg), Alto (>400mg).
     
-    3. PONTUAÇÃO (SCORE):
-       - Clean Label (até 3 ingredientes naturais, ex: Tomate Pelado): Mínimo 90.
-       - Ultraprocessados com aditivos carcinogênicos: Máximo 40.
+    PONTUAÇÃO:
+    - Clean Label (até 3 ingredientes naturais): Score 90+.
+    - Ultraprocessados com aditivos carcinogênicos (ex: Caramelo IV): Score < 40.
     
-    4. LINGUAGEM:
-       - Evite termos como "perigoso" ou "tóxico" para doses reguladas.
-       - Use "evidência científica", "consenso regulatório", "risco associado ao consumo frequente".
-    
-    RESPONDA EM PORTUGUÊS (BR) EM FORMATO JSON.
+    RESPONDA SEMPRE EM PORTUGUÊS (BR) EM JSON.
   `;
 
   const responseSchema = {
@@ -39,6 +37,17 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
       product_name: { type: Type.STRING },
       score: { type: Type.NUMBER },
       summary: { type: Type.STRING },
+      product_classification: {
+        type: Type.OBJECT,
+        properties: {
+          category: {
+            type: Type.STRING,
+            enum: ["extrato_de_tomate", "molho_de_tomate", "passata", "bebida_adocada", "bebida_zero", "snack_salgado", "snack_doce", "laticinio", "embutido", "outros"]
+          },
+          confidence: { type: Type.NUMBER }
+        },
+        required: ["category", "confidence"]
+      },
       macro_analysis: {
         type: Type.OBJECT,
         properties: {
@@ -74,7 +83,8 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
             name: { type: Type.STRING },
             calories: { type: Type.NUMBER },
             ingredients_brief: { type: Type.STRING }
-          }
+          },
+          required: ["name", "calories", "ingredients_brief"]
         }
       },
       replacements_market: {
@@ -84,7 +94,8 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
           properties: {
             name: { type: Type.STRING },
             benefit: { type: Type.STRING }
-          }
+          },
+          required: ["name", "benefit"]
         }
       },
       deep_dive: {
@@ -102,13 +113,15 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
                 cancer_risk: { type: Type.STRING },
                 hormones: { type: Type.STRING },
                 general_consensus: { type: Type.STRING }
-              }
+              },
+              required: ["general_consensus"]
             }
-          }
+          },
+         required: ["name", "warning_level", "short_summary", "technological_function", "scientific_evidence"]
         }
       }
     },
-    required: ["product_name", "score", "summary", "macro_analysis", "ingredients_overview", "the_good", "the_bad", "replacements_food", "replacements_market", "deep_dive"]
+    required: ["product_name", "score", "summary", "product_classification", "macro_analysis", "ingredients_overview", "the_good", "the_bad", "replacements_food", "replacements_market", "deep_dive"]
   };
 
   try {
@@ -123,7 +136,7 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
       model: 'gemini-3-flash-preview',
       contents: {
         parts: [
-          { text: "Analise estes rótulos seguindo as diretrizes científicas e retorne o JSON estruturado." },
+          { text: "Analise estes rótulos e categorize o produto rigorosamente. Use confiança 0.9 se tiver certeza da categoria para substituições curadas." },
           ...imageParts
         ]
       },
@@ -137,7 +150,19 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
     const text = response.text;
     if (!text) throw new Error("API retornou vazio.");
 
-    return JSON.parse(text);
+    const data = JSON.parse(text) as NutritionalAnalysis;
+    
+    console.log("NutriEye: Resposta da IA processada:", {
+      nome: data.product_name,
+      categoria: data.product_classification.category,
+      confiança: data.product_classification.confidence
+    });
+
+    // Enrich with deterministic logic
+    data.consumption_guide = buildConsumptionGuide(data);
+    data.curated_replacement = getCuratedReplacement(data);
+
+    return data;
   } catch (error) {
     console.error("NutriEye Service Error:", error);
     throw error;

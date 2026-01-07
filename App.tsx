@@ -5,6 +5,8 @@ import ImageUpload from './components/ImageUpload';
 import AnalysisResults from './components/AnalysisResults';
 import { analyzeLabels } from './services/geminiService';
 import { AnalysisState } from './types';
+import { LOADING_TIPS } from './constants/tips';
+
 
 const App: React.FC = () => {
   const [state, setState] = useState<AnalysisState>({
@@ -101,9 +103,13 @@ const App: React.FC = () => {
               </div>
             </div>
             <h2 className="text-2xl font-black text-gray-900 mb-2">Processando Rótulos...</h2>
-            <div className="space-y-2 text-center">
-              <p className="text-gray-500 text-sm animate-pulse">Cruzando dados com estudos da IARC e EFSA...</p>
-              <p className="text-gray-400 text-xs">Identificando substâncias controversas</p>
+
+            <div className="mt-6 max-w-sm w-full bg-white p-6 rounded-2xl border border-blue-100 shadow-sm relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+              <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-2">Você sabia?</p>
+              <p className="text-gray-600 text-sm font-medium leading-relaxed animate-in fade-in duration-700 key={Math.random()}">
+                "{LOADING_TIPS[Math.floor(Math.random() * LOADING_TIPS.length)]}"
+              </p>
             </div>
           </div>
         )}
