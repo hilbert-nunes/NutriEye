@@ -645,7 +645,7 @@
                     "store": "Amazon",
                     "url": "https://www.amazon.com.br/NatuCheese-Queijo-Vegetal-Mussarela-Especial/dp/B0D3J9JJT7/",
                     "price": {
-                        "amount": 52.90,
+                        "amount": 9.19,
                         "currency": "BRL"
                     },
                     "last_checked": "2026-01-07"
@@ -679,82 +679,156 @@
     "doce_de_leite": [],
     "enlatado": [],
     "refrigerante": [
-        [
-            {
-                "name": "Poddi™ Refrigerante Prebiótico",
-                "image": "https://storage.googleapis.com/nutri_eye_store/refrigerante.jpg",
-                "reason": "Poddi™ é o primeiro refri prebiótico do Brasil.",
-                "calories": 13,
-                "ingredients": "Água gaseificada, suco concentrado de limão, suco de cereja, suco concentrado de maçã, blend de fibras prebióticas Poddi™ (poly-D-glucose, Inulina)",
-                "allergens": {
-                    "contains_gluten": false,
-                    "contains_lactose": false
-                },
-                "portion": {
-                    "size_g": 300,
-                    "description": "1 lata"
-                },
-                "nutrition": {
-                    "calories_kcal": 13,
-                    "carbohydrates_g": 1,
-                    "proteins_g": 1,
-                    "total_fat_g": 0,
-                    "saturated_fat_g": 0,
-                    "trans_fat_g": 0,
-                    "fiber_g": 0,
-                    "sodium_mg": 120
-                },
-                "daily_value_percentage": {
-                    "calories": 4,
-                    "carbohydrates": 2,
-                    "proteins": 2,
-                    "fiber": 0,
-                    "sodium": 6
-                },
-                "dimensions": {
-                    "width_cm": 10,
-                    "depth_cm": 10,
-                    "height_cm": 21.5,
-                    "weight_g": 1000
-                },
-                "asin": "B00PHJZM66",
-                "purchase_links": [
-                    {
-                        "id": "amazon",
-                        "store": "Amazon",
-                        "url": "https://www.poddi.com.br/products/kit-refri-prebiotico-poddi",
-                        "price": {
-                            "amount": 52.90,
-                            "currency": "BRL"
-                        },
-                        "last_checked": "2026-01-07"
+        {
+            "name": "Poddi™ Refrigerante Prebiótico",
+            "image": "https://storage.googleapis.com/nutri_eye_store/refrigerante.jpg",
+            "reason": "Poddi™ é o primeiro refri prebiótico do Brasil.",
+            "calories": 13,
+            "ingredients": "Água gaseificada, suco concentrado de limão, suco de cereja, suco concentrado de maçã, blend de fibras prebióticas Poddi™ (poly-D-glucose, Inulina)",
+            "allergens": {
+                "contains_gluten": false,
+                "contains_lactose": false
+            },
+            "portion": {
+                "size_g": 300,
+                "description": "1 lata"
+            },
+            "nutrition": {
+                "calories_kcal": 13,
+                "carbohydrates_g": 1,
+                "proteins_g": 1,
+                "total_fat_g": 0,
+                "saturated_fat_g": 0,
+                "trans_fat_g": 0,
+                "fiber_g": 0,
+                "sodium_mg": 120
+            },
+            "daily_value_percentage": {
+                "calories": 4,
+                "carbohydrates": 2,
+                "proteins": 2,
+                "fiber": 0,
+                "sodium": 6
+            },
+            "dimensions": {
+                "width_cm": 10,
+                "depth_cm": 10,
+                "height_cm": 21.5,
+                "weight_g": 1000
+            },
+            "asin": "B00PHJZM66",
+            "purchase_links": [
+                {
+                    "id": "amazon",
+                    "store": "Amazon",
+                    "url": "https://www.poddi.com.br/products/kit-refri-prebiotico-poddi",
+                    "price": {
+                        "amount": 52.90,
+                        "currency": "BRL"
                     },
-                    {
-                        "id": "paodeacucar",
-                        "store": "Pão de Açúcar",
-                        "url": "https://www.paodeacucar.com/produto/123456",
-                        "price": {
-                            "amount": 12.99,
-                            "currency": "BRL"
-                        },
-                        "last_checked": "2026-01-07"
-                    }
-                ],
-                "price_summary": {
-                    "lowest_price": {
-                        "amount": 18.90,
-                        "currency": "BRL",
-                        "store_id": "amazon",
-                        "url": "https://www.amazon.com.br/dp/B07Y2F6H7P",
-                        "last_checked": "2026-01-07"
+                    "last_checked": "2026-01-07"
+                },
+                {
+                    "id": "paodeacucar",
+                    "store": "Pão de Açúcar",
+                    "url": "https://www.paodeacucar.com/produto/123456",
+                    "price": {
+                        "amount": 12.99,
+                        "currency": "BRL"
                     },
-                    "price_range": {
-                        "min": 18.90,
-                        "max": 21.49
-                    }
+                    "last_checked": "2026-01-07"
+                }
+            ],
+            "price_summary": {
+                "lowest_price": {
+                    "amount": 18.90,
+                    "currency": "BRL",
+                    "store_id": "amazon",
+                    "url": "https://www.amazon.com.br/dp/B07Y2F6H7P",
+                    "last_checked": "2026-01-07"
+                },
+                "price_range": {
+                    "min": 18.90,
+                    "max": 21.49
                 }
             }
-        ]
+        }
+    ],
+    "bebida_zero": [
+        {
+            "name": "Poddi™ Refrigerante Prebiótico",
+            "image": "https://storage.googleapis.com/nutri_eye_store/refrigerante.jpg",
+            "reason": "Poddi™ é o primeiro refri prebiótico do Brasil.",
+            "calories": 13,
+            "ingredients": "Água gaseificada, suco concentrado de limão, suco de cereja, suco concentrado de maçã, blend de fibras prebióticas Poddi™ (poly-D-glucose, Inulina)",
+            "allergens": {
+                "contains_gluten": false,
+                "contains_lactose": false
+            },
+            "portion": {
+                "size_g": 300,
+                "description": "1 lata"
+            },
+            "nutrition": {
+                "calories_kcal": 13,
+                "carbohydrates_g": 1,
+                "proteins_g": 1,
+                "total_fat_g": 0,
+                "saturated_fat_g": 0,
+                "trans_fat_g": 0,
+                "fiber_g": 0,
+                "sodium_mg": 120
+            },
+            "daily_value_percentage": {
+                "calories": 4,
+                "carbohydrates": 2,
+                "proteins": 2,
+                "fiber": 0,
+                "sodium": 6
+            },
+            "dimensions": {
+                "width_cm": 10,
+                "depth_cm": 10,
+                "height_cm": 21.5,
+                "weight_g": 1000
+            },
+            "asin": "B00PHJZM66",
+            "purchase_links": [
+                {
+                    "id": "amazon",
+                    "store": "Amazon",
+                    "url": "https://www.poddi.com.br/products/kit-refri-prebiotico-poddi",
+                    "price": {
+                        "amount": 9.19,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                },
+                {
+                    "id": "paodeacucar",
+                    "store": "Pão de Açúcar",
+                    "url": "https://www.paodeacucar.com/produto/123456",
+                    "price": {
+                        "amount": 12.99,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                }
+            ],
+            "price_summary": {
+                "lowest_price": {
+                    "amount": 18.90,
+                    "currency": "BRL",
+                    "store_id": "amazon",
+                    "url": "https://www.amazon.com.br/dp/B07Y2F6H7P",
+                    "last_checked": "2026-01-07"
+                },
+                "price_range": {
+                    "min": 18.90,
+                    "max": 21.49
+                }
+            }
+        }
     ],
     "cerveja": [],
     "biscoito": [],
