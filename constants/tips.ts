@@ -44,7 +44,7 @@ export const LOADING_TIPS = [
     "A dose faz o risco, não o nome do ingrediente.",
     "Aditivos são avaliados por órgãos reguladores.",
     "Ingredientes comuns também podem ter nomes técnicos.",
-    "“Natural” não significa automaticamente melhor.",
+    "Natural não significa automaticamente melhor.",
     "Um ingrediente isolado raramente define a qualidade do produto.",
     "O conjunto da fórmula é mais importante que um item específico.",
 

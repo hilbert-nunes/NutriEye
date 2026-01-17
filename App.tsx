@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import ImageUpload from './components/ImageUpload';
 import AnalysisResults from './components/AnalysisResults';
@@ -16,26 +16,44 @@ const App: React.FC = () => {
     error: null
   });
 
+  const [activeTips, setActiveTips] = useState<string[]>([]);
+  const [currentTipIndex, setCurrentTipIndex] = useState(0);
+
+  useEffect(() => {
+    if (state.isAnalyzing) {
+      const shuffled = [...LOADING_TIPS].sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, 3);
+      setActiveTips(selected);
+      setCurrentTipIndex(0);
+
+      const interval = setInterval(() => {
+        setCurrentTipIndex((prev) => (prev + 1) % selected.length);
+      }, 2000);
+
+      return () => clearInterval(interval);
+    }
+  }, [state.isAnalyzing]);
+
   const handleImagesReady = async (images: string[]) => {
-    setState(prev => ({ 
-      ...prev, 
-      images, 
-      isAnalyzing: true, 
-      error: null 
+    setState(prev => ({
+      ...prev,
+      images,
+      isAnalyzing: true,
+      error: null
     }));
 
     try {
       const result = await analyzeLabels(images);
-      setState(prev => ({ 
-        ...prev, 
-        isAnalyzing: false, 
-        result 
+      setState(prev => ({
+        ...prev,
+        isAnalyzing: false,
+        result
       }));
     } catch (err) {
       console.error("Analysis failed:", err);
-      setState(prev => ({ 
-        ...prev, 
-        isAnalyzing: false, 
+      setState(prev => ({
+        ...prev,
+        isAnalyzing: false,
         error: "Ocorreu um erro ao analisar o rótulo. Verifique sua conexão ou tente novamente com fotos mais nítidas."
       }));
     }
@@ -44,7 +62,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col antialiased">
       <Header />
-      
+
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 pt-8 pb-20">
         {!state.result && !state.isAnalyzing && (
           <div className="animate-in fade-in duration-500">
@@ -56,7 +74,7 @@ const App: React.FC = () => {
                 Use o NutriEye para revelar o que os rótulos tentam esconder. Detectamos aditivos perigosos e sugerimos trocas inteligentes.
               </p>
             </div>
-            
+
             <ImageUpload onImagesReady={handleImagesReady} />
 
             <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -107,8 +125,11 @@ const App: React.FC = () => {
             <div className="mt-6 max-w-sm w-full bg-white p-6 rounded-2xl border border-blue-100 shadow-sm relative overflow-hidden">
               <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
               <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-2">Você sabia?</p>
-              <p className="text-gray-600 text-sm font-medium leading-relaxed animate-in fade-in duration-700 key={Math.random()}">
-                "{LOADING_TIPS[Math.floor(Math.random() * LOADING_TIPS.length)]}"
+              <p
+                key={currentTipIndex}
+                className="text-gray-600 text-sm font-medium leading-relaxed animate-in fade-in slide-in-from-bottom-2 duration-500"
+              >
+                "{activeTips[currentTipIndex] || "Carregando dicas..."}"
               </p>
             </div>
           </div>
@@ -123,7 +144,7 @@ const App: React.FC = () => {
               <h3 className="font-bold">Oops! Algo deu errado</h3>
             </div>
             <p className="text-sm text-red-600 mb-4">{state.error}</p>
-            <button 
+            <button
               onClick={() => setState(prev => ({ ...prev, error: null, isAnalyzing: false }))}
               className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-bold shadow-sm"
             >
