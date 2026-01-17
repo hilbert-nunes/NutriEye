@@ -22,13 +22,13 @@ const App: React.FC = () => {
   useEffect(() => {
     if (state.isAnalyzing) {
       const shuffled = [...LOADING_TIPS].sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, 3);
+      const selected = shuffled.slice(0, 5);
       setActiveTips(selected);
       setCurrentTipIndex(0);
 
       const interval = setInterval(() => {
         setCurrentTipIndex((prev) => (prev + 1) % selected.length);
-      }, 2000);
+      }, 4000);
 
       return () => clearInterval(interval);
     }
