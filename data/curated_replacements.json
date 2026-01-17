@@ -1,0 +1,687 @@
+{
+    "extrato_de_tomate": [
+        {
+            "name": "Passata di Pomodoro Italiana",
+            "image": "https://storage.googleapis.com/nutri_eye_store/passata.jpg",
+            "reason": "Feito apenas com tomate e sal. Sem conservantes ou espessantes comuns em extratos industriais.",
+            "calories": 25,
+            "ingredients": "Tomates italianos, sal.",
+            "allergens": {
+                "contains_gluten": false
+            },
+            "portion": {
+                "size_g": 60,
+                "description": "3 colheres de sopa"
+            },
+            "nutrition": {
+                "calories_kcal": 11,
+                "carbohydrates_g": 3,
+                "proteins_g": 1,
+                "total_fat_g": 0,
+                "saturated_fat_g": 0,
+                "trans_fat_g": 0,
+                "fiber_g": 0.6,
+                "sodium_mg": 89
+            },
+            "daily_value_percentage": {
+                "calories": 0.5,
+                "carbohydrates": 1,
+                "proteins": 2,
+                "fiber": 2.5,
+                "sodium": 5
+            },
+            "dimensions": {
+                "width_cm": 7,
+                "depth_cm": 7,
+                "height_cm": 21.5,
+                "weight_g": 1000
+            },
+            "asin": "B00PHJZM66",
+            "purchase_links": [
+                {
+                    "id": "amazon",
+                    "store": "Amazon",
+                    "url": "https://www.amazon.com.br/Molho-Cecco-Passata-Pomodoro-Sabor/dp/B00PHJZM66/",
+                    "price": {
+                        "amount": 24.99,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                },
+                {
+                    "id": "paodeacucar",
+                    "store": "Pão de Açúcar",
+                    "url": "https://www.paodeacucar.com/produto/123456",
+                    "price": {
+                        "amount": 21.49,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                }
+            ],
+            "price_summary": {
+                "lowest_price": {
+                    "amount": 18.90,
+                    "currency": "BRL",
+                    "store_id": "amazon",
+                    "url": "https://www.amazon.com.br/dp/B07Y2F6H7P",
+                    "last_checked": "2026-01-07"
+                },
+                "price_range": {
+                    "min": 18.90,
+                    "max": 21.49
+                }
+            }
+        }
+    ],
+    "molho_de_tomate": [
+        {
+            "name": "Passata di Pomodoro Italiana",
+            "image": "https://storage.googleapis.com/nutri_eye_store/passata.jpg",
+            "reason": "Feito apenas com tomate e sal. Sem conservantes ou espessantes comuns em extratos industriais.",
+            "calories": 25,
+            "ingredients": "Tomates italianos, sal.",
+            "allergens": {
+                "contains_gluten": false
+            },
+            "portion": {
+                "size_g": 60,
+                "description": "3 colheres de sopa"
+            },
+            "nutrition": {
+                "calories_kcal": 11,
+                "carbohydrates_g": 3,
+                "proteins_g": 1,
+                "total_fat_g": 0,
+                "saturated_fat_g": 0,
+                "trans_fat_g": 0,
+                "fiber_g": 0.6,
+                "sodium_mg": 89
+            },
+            "daily_value_percentage": {
+                "calories": 0.5,
+                "carbohydrates": 1,
+                "proteins": 2,
+                "fiber": 2.5,
+                "sodium": 5
+            },
+            "dimensions": {
+                "width_cm": 7,
+                "depth_cm": 7,
+                "height_cm": 21.5,
+                "weight_g": 1000
+            },
+            "asin": "B00PHJZM66",
+            "purchase_links": [
+                {
+                    "id": "amazon",
+                    "store": "Amazon",
+                    "url": "https://www.amazon.com.br/Molho-Cecco-Passata-Pomodoro-Sabor/dp/B00PHJZM66/",
+                    "price": {
+                        "amount": 24.99,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                },
+                {
+                    "id": "paodeacucar",
+                    "store": "Pão de Açúcar",
+                    "url": "https://www.paodeacucar.com/produto/123456",
+                    "price": {
+                        "amount": 21.49,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                }
+            ],
+            "price_summary": {
+                "lowest_price": {
+                    "amount": 18.90,
+                    "currency": "BRL",
+                    "store_id": "amazon",
+                    "url": "https://www.amazon.com.br/dp/B07Y2F6H7P",
+                    "last_checked": "2026-01-07"
+                },
+                "price_range": {
+                    "min": 18.90,
+                    "max": 21.49
+                }
+            }
+        }
+    ],
+    "passata": [
+        {
+            "name": "Passata di Pomodoro Italiana",
+            "image": "https://storage.googleapis.com/nutri_eye_store/passata.jpg",
+            "reason": "Feito apenas com tomate e sal. Sem conservantes ou espessantes comuns em extratos industriais.",
+            "calories": 25,
+            "ingredients": "Tomates italianos, sal.",
+            "allergens": {
+                "contains_gluten": false
+            },
+            "portion": {
+                "size_g": 60,
+                "description": "3 colheres de sopa"
+            },
+            "nutrition": {
+                "calories_kcal": 11,
+                "carbohydrates_g": 3,
+                "proteins_g": 1,
+                "total_fat_g": 0,
+                "saturated_fat_g": 0,
+                "trans_fat_g": 0,
+                "fiber_g": 0.6,
+                "sodium_mg": 89
+            },
+            "daily_value_percentage": {
+                "calories": 0.5,
+                "carbohydrates": 1,
+                "proteins": 2,
+                "fiber": 2.5,
+                "sodium": 5
+            },
+            "dimensions": {
+                "width_cm": 7,
+                "depth_cm": 7,
+                "height_cm": 21.5,
+                "weight_g": 1000
+            },
+            "asin": "B00PHJZM66",
+            "purchase_links": [
+                {
+                    "id": "amazon",
+                    "store": "Amazon",
+                    "url": "https://www.amazon.com.br/Molho-Cecco-Passata-Pomodoro-Sabor/dp/B00PHJZM66/",
+                    "price": {
+                        "amount": 24.99,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                },
+                {
+                    "id": "paodeacucar",
+                    "store": "Pão de Açúcar",
+                    "url": "https://www.paodeacucar.com/produto/123456",
+                    "price": {
+                        "amount": 21.49,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                }
+            ],
+            "price_summary": {
+                "lowest_price": {
+                    "amount": 18.90,
+                    "currency": "BRL",
+                    "store_id": "amazon",
+                    "url": "https://www.amazon.com.br/dp/B07Y2F6H7P",
+                    "last_checked": "2026-01-07"
+                },
+                "price_range": {
+                    "min": 18.90,
+                    "max": 21.49
+                }
+            }
+        }
+    ],
+    "chocolate": [
+        {
+            "name": "Chocolate Garoto Baton ao Leite",
+            "image": "https://storage.googleapis.com/nutri_eye_store/chocolate.jpg",
+            "reason": "Fácil de incluir em uma dieta balanceada. Sensação de satisfação e recompensa sem culpa.",
+            "calories": 25,
+            "ingredients": "Chocolate, Leite condensado, Leite em pó.",
+            "allergens": {
+                "contains_gluten": false
+            },
+            "portion": {
+                "size_g": 87,
+                "description": "16g"
+            },
+            "nutrition": {
+                "calories_kcal": 11,
+                "carbohydrates_g": 3,
+                "proteins_g": 1,
+                "total_fat_g": 0,
+                "saturated_fat_g": 0,
+                "trans_fat_g": 0,
+                "fiber_g": 0.6,
+                "sodium_mg": 89
+            },
+            "daily_value_percentage": {
+                "calories": 0.5,
+                "carbohydrates": 1,
+                "proteins": 2,
+                "fiber": 2.5,
+                "sodium": 5
+            },
+            "dimensions": {
+                "width_cm": 7,
+                "depth_cm": 7,
+                "height_cm": 21.5,
+                "weight_g": 1000
+            },
+            "asin": "B00PHJZM66",
+            "purchase_links": [
+                {
+                    "id": "amazon",
+                    "store": "Amazon",
+                    "url": "https://www.amazon.com.br/Chocolate-Baton-Ao-Leite-16g/dp/B001CW4UJW/",
+                    "price": {
+                        "amount": 48.78,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                },
+                {
+                    "id": "paodeacucar",
+                    "store": "Pão de Açúcar",
+                    "url": "https://www.paodeacucar.com/produto/123456",
+                    "price": {
+                        "amount": 21.49,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                }
+            ],
+            "price_summary": {
+                "lowest_price": {
+                    "amount": 18.90,
+                    "currency": "BRL",
+                    "store_id": "amazon",
+                    "url": "https://www.amazon.com.br/dp/B07Y2F6H7P",
+                    "last_checked": "2026-01-07"
+                },
+                "price_range": {
+                    "min": 18.90,
+                    "max": 21.49
+                }
+            }
+        }
+    ],
+    "leite_em_po": [
+        {
+            "name": "Molico Nestlé Nutrição Diária Para Seus Ossos",
+            "image": "https://storage.googleapis.com/nutri_eye_store/leite_em_po.jpg",
+            "reason": "Sabor agradável e satisfação sem culpa. Fonte de proteínas e vitaminas.",
+            "calories": 25,
+            "ingredients": "Leite desnatado, maltodextrina, soro do leite pasteurizado, vitaminas e minerais.",
+            "allergens": {
+                "contains_gluten": false,
+                "contains_lactose": true
+            },
+            "portion": {
+                "size_g": 89,
+                "description": "2 colheres de sopa"
+            },
+            "nutrition": {
+                "calories_kcal": 11,
+                "carbohydrates_g": 3,
+                "proteins_g": 1,
+                "total_fat_g": 0,
+                "saturated_fat_g": 0,
+                "trans_fat_g": 0,
+                "fiber_g": 0.6,
+                "sodium_mg": 89
+            },
+            "daily_value_percentage": {
+                "calories": 0.5,
+                "carbohydrates": 1,
+                "proteins": 2,
+                "fiber": 2.5,
+                "sodium": 5
+            },
+            "dimensions": {
+                "width_cm": 7,
+                "depth_cm": 7,
+                "height_cm": 21.5,
+                "weight_g": 1000
+            },
+            "asin": "B00PHJZM66",
+            "purchase_links": [
+                {
+                    "id": "amazon",
+                    "store": "Amazon",
+                    "url": "https://www.amazon.com.br/Leite-Zero-Lactose-Molico-260g/dp/B081QW8NM1/",
+                    "price": {
+                        "amount": 23.99,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                },
+                {
+                    "id": "paodeacucar",
+                    "store": "Pão de Açúcar",
+                    "url": "https://www.paodeacucar.com/produto/123456",
+                    "price": {
+                        "amount": 21.49,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                }
+            ],
+            "price_summary": {
+                "lowest_price": {
+                    "amount": 18.90,
+                    "currency": "BRL",
+                    "store_id": "amazon",
+                    "url": "https://www.amazon.com.br/dp/B07Y2F6H7P",
+                    "last_checked": "2026-01-07"
+                },
+                "price_range": {
+                    "min": 18.90,
+                    "max": 21.49
+                }
+            }
+        }
+    ],
+    "pao": [
+        {
+            "name": "Jasmine Pão de Forma Multigrãos Sem Glúten",
+            "image": "https://storage.googleapis.com/nutri_eye_store/pao.jpg",
+            "reason": "Sem conservantes ou espessantes comuns em extratos industriais.",
+            "calories": 25,
+            "ingredients": "Farinha de trigo, água, sal, levedura, óleo, fermento em pó.",
+            "allergens": {
+                "contains_gluten": false
+            },
+            "portion": {
+                "size_g": 50,
+                "description": "2 fatias"
+            },
+            "nutrition": {
+                "calories_kcal": 100,
+                "carbohydrates_g": 20,
+                "proteins_g": 2,
+                "total_fat_g": 0,
+                "saturated_fat_g": 0,
+                "trans_fat_g": 0,
+                "fiber_g": 2,
+                "sodium_mg": 89
+            },
+            "daily_value_percentage": {
+                "calories": 5,
+                "carbohydrates": 5,
+                "proteins": 4,
+                "fiber": 8,
+                "sodium": 6
+            },
+            "dimensions": {
+                "width_cm": 7,
+                "depth_cm": 7,
+                "height_cm": 21.5,
+                "weight_g": 1000
+            },
+            "asin": "B00PHJZM66",
+            "purchase_links": [
+                {
+                    "id": "amazon",
+                    "store": "Amazon",
+                    "url": "https://www.amazon.com.br/P%C3%A3o-Multigr%C3%A3os-Gl%C3%BAten-Jasmine-350g/dp/B07XSFV6KB/",
+                    "price": {
+                        "amount": 24.99,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                },
+                {
+                    "id": "paodeacucar",
+                    "store": "Pão de Açúcar",
+                    "url": "https://www.paodeacucar.com/produto/123456",
+                    "price": {
+                        "amount": 21.49,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                }
+            ],
+            "price_summary": {
+                "lowest_price": {
+                    "amount": 18.90,
+                    "currency": "BRL",
+                    "store_id": "amazon",
+                    "url": "https://www.amazon.com.br/dp/B07Y2F6H7P",
+                    "last_checked": "2026-01-07"
+                },
+                "price_range": {
+                    "min": 18.90,
+                    "max": 21.49
+                }
+            }
+        }
+    ],
+    "iogurte": [
+        {
+            "name": "YoPRO Bebida Láctea UHT Chocolate",
+            "image": "https://storage.googleapis.com/nutri_eye_store/iogurte.jpg",
+            "reason": "Sem conservantes ou espessantes comuns em extratos industriais.",
+            "calories": 25,
+            "ingredients": "Leite, soro do leite, água,",
+            "allergens": {
+                "contains_gluten": false
+            },
+            "portion": {
+                "size_g": 100,
+                "description": "100ml"
+            },
+            "nutrition": {
+                "calories_kcal": 69,
+                "carbohydrates_g": 12,
+                "proteins_g": 2,
+                "total_fat_g": 0,
+                "saturated_fat_g": 0,
+                "trans_fat_g": 0,
+                "fiber_g": 2,
+                "sodium_mg": 120
+            },
+            "daily_value_percentage": {
+                "calories": 5,
+                "carbohydrates": 5,
+                "proteins": 4,
+                "fiber": 8,
+                "sodium": 6
+            },
+            "dimensions": {
+                "width_cm": 10,
+                "depth_cm": 10,
+                "height_cm": 21.5,
+                "weight_g": 1000
+            },
+            "asin": "B00PHJZM66",
+            "purchase_links": [
+                {
+                    "id": "amazon",
+                    "store": "Amazon",
+                    "url": "https://www.amazon.com.br/Bebida-L%C3%A1ctea-Prote%C3%ADna-Chocolate-YoPRO/dp/B0823BN8FR/",
+                    "price": {
+                        "amount": 9.89,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                },
+                {
+                    "id": "paodeacucar",
+                    "store": "Pão de Açúcar",
+                    "url": "https://www.paodeacucar.com/produto/123456",
+                    "price": {
+                        "amount": 12.99,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                }
+            ],
+            "price_summary": {
+                "lowest_price": {
+                    "amount": 18.90,
+                    "currency": "BRL",
+                    "store_id": "amazon",
+                    "url": "https://www.amazon.com.br/dp/B07Y2F6H7P",
+                    "last_checked": "2026-01-07"
+                },
+                "price_range": {
+                    "min": 18.90,
+                    "max": 21.49
+                }
+            }
+        }
+    ],
+    "mostarda": [
+        {
+            "name": "Mostarda Heinz Tradicional",
+            "image": "https://storage.googleapis.com/nutri_eye_store/mostarda.jpg",
+            "reason": "Sem conservantes ou espessantes comuns em extratos industriais.",
+            "calories": 25,
+            "ingredients": "Mostarda, água, açúcar,",
+            "allergens": {
+                "contains_gluten": false
+            },
+            "portion": {
+                "size_g": 12,
+                "description": "1 colher de sopa"
+            },
+            "nutrition": {
+                "calories_kcal": 7,
+                "carbohydrates_g": 1,
+                "proteins_g": 1,
+                "total_fat_g": 0,
+                "saturated_fat_g": 0,
+                "trans_fat_g": 0,
+                "fiber_g": 0,
+                "sodium_mg": 120
+            },
+            "daily_value_percentage": {
+                "calories": 4,
+                "carbohydrates": 2,
+                "proteins": 2,
+                "fiber": 0,
+                "sodium": 6
+            },
+            "dimensions": {
+                "width_cm": 10,
+                "depth_cm": 10,
+                "height_cm": 21.5,
+                "weight_g": 1000
+            },
+            "asin": "B00PHJZM66",
+            "purchase_links": [
+                {
+                    "id": "amazon",
+                    "store": "Amazon",
+                    "url": "https://www.amazon.com.br/HEINZ-Mostarda-Heinz-255g/dp/B07YN9SQR9/",
+                    "price": {
+                        "amount": 9.89,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                },
+                {
+                    "id": "paodeacucar",
+                    "store": "Pão de Açúcar",
+                    "url": "https://www.paodeacucar.com/produto/123456",
+                    "price": {
+                        "amount": 12.99,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                }
+            ],
+            "price_summary": {
+                "lowest_price": {
+                    "amount": 18.90,
+                    "currency": "BRL",
+                    "store_id": "amazon",
+                    "url": "https://www.amazon.com.br/dp/B07Y2F6H7P",
+                    "last_checked": "2026-01-07"
+                },
+                "price_range": {
+                    "min": 18.90,
+                    "max": 21.49
+                }
+            }
+        }
+    ],
+    "queijo": [
+        {
+            "name": "NatuCheese, Queijo Vegetal Tipo Mussarela Especial Oliva",
+            "image": "https://storage.googleapis.com/nutri_eye_store/queijo.jpg",
+            "reason": "Ótima opção para quem não pode ou não quer comer queijo de vaca.",
+            "calories": 85,
+            "ingredients": "Mostarda, água, açúcar,",
+            "allergens": {
+                "contains_gluten": false,
+                "contains_lactose": false
+            },
+            "portion": {
+                "size_g": 12,
+                "description": "1 colher de sopa"
+            },
+            "nutrition": {
+                "calories_kcal": 7,
+                "carbohydrates_g": 1,
+                "proteins_g": 1,
+                "total_fat_g": 0,
+                "saturated_fat_g": 0,
+                "trans_fat_g": 0,
+                "fiber_g": 0,
+                "sodium_mg": 120
+            },
+            "daily_value_percentage": {
+                "calories": 4,
+                "carbohydrates": 2,
+                "proteins": 2,
+                "fiber": 0,
+                "sodium": 6
+            },
+            "dimensions": {
+                "width_cm": 10,
+                "depth_cm": 10,
+                "height_cm": 21.5,
+                "weight_g": 1000
+            },
+            "asin": "B00PHJZM66",
+            "purchase_links": [
+                {
+                    "id": "amazon",
+                    "store": "Amazon",
+                    "url": "https://www.amazon.com.br/NatuCheese-Queijo-Vegetal-Mussarela-Especial/dp/B0D3J9JJT7/",
+                    "price": {
+                        "amount": 52.90,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                },
+                {
+                    "id": "paodeacucar",
+                    "store": "Pão de Açúcar",
+                    "url": "https://www.paodeacucar.com/produto/123456",
+                    "price": {
+                        "amount": 12.99,
+                        "currency": "BRL"
+                    },
+                    "last_checked": "2026-01-07"
+                }
+            ],
+            "price_summary": {
+                "lowest_price": {
+                    "amount": 18.90,
+                    "currency": "BRL",
+                    "store_id": "amazon",
+                    "url": "https://www.amazon.com.br/dp/B07Y2F6H7P",
+                    "last_checked": "2026-01-07"
+                },
+                "price_range": {
+                    "min": 18.90,
+                    "max": 21.49
+                }
+            }
+        }
+    ],
+    "doce_de_leite": [],
+    "enlatado": [],
+    "refrigerante": [],
+    "cerveja": [],
+    "biscoito": [],
+    "geleia": [],
+    "cereal_matinal": [],
+    "aveia": []
+}

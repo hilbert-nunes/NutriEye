@@ -10,25 +10,20 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
   const systemInstruction = `
-    Você é o NutriEye, um especialista em nutrição brasileiro.
-    Sua missão é classificar e analisar rótulos com precisão científica.
-    
-    DIRETRIZES DE CATEGORIZAÇÃO (CRÍTICO):
-    Classifique o produto obrigatoriamente em uma destas categorias:
-    - extrato_de_tomate, molho_de_tomate, passata, bebida_adocada, bebida_zero, snack_salgado, snack_doce, laticinio, embutido, outros.
-    
-    Use confidence >= 0.85 apenas se tiver CERTEZA absoluta baseado na imagem.
-    Se for um extrato de tomate industrial, classifique como 'extrato_de_tomate'.
-    Se for um molho de tomate pronto ou temperado, classifique como 'molho_de_tomate'.
+    Você é o NutriEye, um sistema especialista em nutrição brasileira de alta precisão.
+    Sua missão é realizar OCR e análise bioquímica/nutricional de rótulos.
 
-    DIRETRIZES ANVISA RDC 429/2020:
-    - Sódio (100g): Muito Baixo (≤40mg), Baixo (≤120mg), Moderado (121-400mg), Alto (>400mg).
-    
-    PONTUAÇÃO:
-    - Clean Label (até 3 ingredientes naturais): Score 90+.
-    - Ultraprocessados com aditivos carcinogênicos (ex: Caramelo IV): Score < 40.
-    
-    RESPONDA SEMPRE EM PORTUGUÊS (BR) EM JSON.
+    REGRAS OBRIGATÓRIAS:
+    1. Você DEVE sempre retornar um objeto JSON válido seguindo exatamente o schema fornecido.
+    2. NUNCA retorne uma resposta vazia ou apenas pensamentos (thoughts). O output final deve ser o JSON.
+    3. Se os dados estiverem ilegíveis, tente inferir pelo nome do produto ou preencha com valores padrão realistas para a categoria, mas NUNCA deixe de responder o JSON completo.
+    4. DIRETRIZES DE CATEGORIZAÇÃO: Classifique rigorosamente em: extrato_de_tomate, molho_de_tomate, passata, bebida_adocada, bebida_zero, snack_salgado, snack_doce, laticinio, embutido ou outros.
+    5. ANVISA RDC 429/2020: Use os limites de sódio por 100g: Muito Baixo (≤40mg), Baixo (≤120mg), Moderado (121-400mg), Alto (>400mg).
+
+    PONTUAÇÃO (Score):
+    - 90-100: Clean Label (apenas ingredientes naturais).
+    - 60-89: Processados com aditivos seguros.
+    - 0-59: Ultraprocessados com aditivos críticos (ex: glutamato monossódico, corantes artificiais, gordura trans, conservantes agressivos).
   `;
 
   const responseSchema = {
@@ -132,39 +127,81 @@ export const analyzeLabels = async (base64Images: string[]): Promise<Nutritional
       }
     }));
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: {
-        parts: [
-          { text: "Analise estes rótulos e categorize o produto rigorosamente. Use confiança 0.9 se tiver certeza da categoria para substituições curadas." },
-          ...imageParts
-        ]
-      },
-      config: {
-        systemInstruction,
-        responseMimeType: "application/json",
-        responseSchema: responseSchema as any
+    let lastError: any;
+    const maxRetries = 3;
+
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        console.log(`NutriEye: Tentativa de análise ${attempt}/${maxRetries}...`);
+
+        const response = await ai.models.generateContent({
+          model: 'gemini-3-flash-preview',
+          contents: [{
+            parts: [
+              { text: "Analise rigorosamente estes rótulos e retorne APENAS o JSON da análise científica." },
+              ...imageParts
+            ]
+          }],
+          config: {
+            systemInstruction,
+            responseMimeType: "application/json",
+            responseSchema: responseSchema as any,
+            temperature: 0,
+            topP: 0.1,
+            topK: 1,
+            // We set a thinking budget to allow reasoning but force an output.
+            thinkingConfig: { thinkingBudget: 4000 }
+          }
+        });
+
+        console.debug(`NutriEye Raw Response (Attempt ${attempt}):`, response);
+
+        // Check for empty response or empty content structure as per user request
+        if (!response || !response.candidates || response.candidates.length === 0) {
+          throw new Error("API Returned empty response or no candidates.");
+        }
+
+        // Check specifically for empty content in the first candidate if possible
+        const firstCandidate = response.candidates[0];
+        if (!firstCandidate.content || Object.keys(firstCandidate.content).length === 0) {
+          throw new Error("API Candidate content is empty (Thinking failed to produce output).");
+        }
+
+        const text = response.text;
+        if (!text || text.trim() === "") {
+          throw new Error("A IA pensou mas não emitiu uma resposta final (texto vazio).");
+        }
+
+        const data = JSON.parse(text) as NutritionalAnalysis;
+
+        // Enrich with deterministic logic
+        data.consumption_guide = buildConsumptionGuide(data);
+        data.curated_replacement = getCuratedReplacement(data);
+
+        return data;
+
+      } catch (error: any) {
+        console.warn(`NutriEye: Analysis attempt ${attempt} failed.`, error.message);
+        lastError = error;
+
+        if (attempt < maxRetries) {
+          const backoff = Math.pow(2, attempt - 1) * 1000 + Math.random() * 500; // Exponential backoff + jitter
+          console.log(`NutriEye: Retrying in ${backoff.toFixed(0)}ms...`);
+          await new Promise(resolve => setTimeout(resolve, backoff));
+        }
       }
-    });
+    }
 
-    const text = response.text;
-    if (!text) throw new Error("API retornou vazio.");
-
-    const data = JSON.parse(text) as NutritionalAnalysis;
-
-    console.log("NutriEye: Resposta da IA processada:", {
-      nome: data.product_name,
-      categoria: data.product_classification.category,
-      confiança: data.product_classification.confidence
-    });
-
-    // Enrich with deterministic logic
-    data.consumption_guide = buildConsumptionGuide(data);
-    data.curated_replacement = getCuratedReplacement(data);
-
-    return data;
-  } catch (error) {
-    console.error("NutriEye Service Error:", error);
+    // If we land here, all retries failed
+    console.error("NutriEye Service Global Error:", lastError);
+    if (lastError?.message?.includes("JSON")) {
+      throw new Error("Erro de formatação nos dados da análise. O modelo falhou em estruturar o JSON corretamente após várias tentativas.");
+    }
+    throw lastError;
+  } catch (error: any) {
+    // Catch any synchronous errors outside the loop (like imageParts processing, though unlikely)
+    // Or re-throw the last error from the loop if it wasn't caught correctly inside (it should be)
+    console.error("NutriEye Critical Error:", error);
     throw error;
   }
 };
